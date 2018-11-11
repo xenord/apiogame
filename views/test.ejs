@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Api OGame</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<input type="text" class="form-control" id="myInput" placeholder="Search for player.." onkeyup="myFunction()" style="width: 100%;">
+		<table class="table table-striped" id="myTable">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Player</th>
+					<th>Status</th>
+					<th>Score</th>
+				</tr>
+			</thead>
+			<tbody>
+			<% for(var i=0; i < highscore.length; i++) { %>
+			   	<tr>
+			     	<td><%= highscore[i].position %></td>
+					<td><%= highscore[i].name %></td>
+					<td>
+					<% if ('status' in highscore[i]) { %>
+						<%= highscore[i].status %>
+					<% }  else if (!('status' in highscore[i])) { %>
+						attivo
+					<% } %>
+					</td>
+					<td><%= highscore[i].score %></td>
+			   	</tr>
+			<% } %>
+			</tbody>
+		</table>
+	</div>
+
+	<script type="text/javascript">
+		function myFunction() {
+			var input, filter, table, tr, td, i;
+			input = document.getElementById("myInput");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("myTable");
+			tr = table.getElementsByTagName("tr");
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td")[1];
+		    	if (td) {
+		      		if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+		        		tr[i].style.display = "";
+		      		} else {
+		        		tr[i].style.display = "none";
+		      		}
+		    	}       
+		  	}
+		}
+	</script>
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>
